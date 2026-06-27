@@ -1,0 +1,7 @@
+% nix
+
+# Rebuild and switch to a new NixOS configuration
+sudo nixos-rebuild --impure switch --flake <path>#<hostname>
+
+$ path: echo ". ${HOME}/canonix" | tr ' ' '\n'
+$ hostname: echo "wsl nas gaming" | tr ' ' '\n'
