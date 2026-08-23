@@ -12,6 +12,10 @@
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     den.url = "github:denful/den";
+    nix-gaming = {
+      url = "github:fufexan/nix-gaming";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake

@@ -10,4 +10,6 @@
     users.nixos = { };
     users.pierre = { };
   };
+
+  den.hosts.x86_64-linux.rog.users.pierre = { };
 }
