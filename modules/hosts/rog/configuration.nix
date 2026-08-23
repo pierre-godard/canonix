@@ -6,6 +6,7 @@
       den.aspects.shell
       den.aspects.niri
       den.aspects.gaming
+      den.aspects.sops
     ];
     nixos = { pkgs, lib, ... }: {
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
