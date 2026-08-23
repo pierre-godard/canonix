@@ -22,7 +22,23 @@
       users.users.pierre = {
         isNormalUser = true;
         shell = pkgs.fish;
-        extraGroups = [ "wheel" "gamemode" ];
+        extraGroups = [ "wheel" "gamemode" "networkmanager" ];
+      };
+
+      networking.networkmanager.enable = true;
+
+      hardware.bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+      };
+      services.blueman.enable = true;
+
+      services.greetd = {
+        enable = true;
+        settings.default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd niri-session";
+          user = "greeter";
+        };
       };
 
       hardware.nvidia.prime = {
