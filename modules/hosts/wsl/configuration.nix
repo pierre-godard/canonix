@@ -2,6 +2,7 @@
   den.aspects.wsl = {
     includes = [
       den.batteries.hostname
+      den.aspects.locale
     ];
     nixos = { pkgs, lib, ... }: {
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
@@ -10,8 +11,6 @@
       wsl.defaultUser = "nixos";
       security.sudo.enable = true;
       system.stateVersion = "26.05";
-      time.timeZone = "Europe/Paris";
-      i18n.defaultLocale = "en_US.UTF-8";
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.backupFileExtension = ".backup";

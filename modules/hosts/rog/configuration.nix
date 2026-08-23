@@ -2,10 +2,15 @@
   den.aspects.rog = {
     includes = [
       den.batteries.hostname
+      den.aspects.locale
       den.aspects.catppuccin
       den.aspects.shell
       den.aspects.niri
       den.aspects.gaming
+      den.aspects.bluetooth
+      den.aspects.networking
+      den.aspects.greetd
+      den.aspects.power
       den.aspects.sops
     ];
     nixos = { pkgs, lib, ... }: {
@@ -14,8 +19,6 @@
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
       security.sudo.enable = true;
       system.stateVersion = "26.05";
-      time.timeZone = "Europe/Paris";
-      i18n.defaultLocale = "en_US.UTF-8";
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.backupFileExtension = ".backup";
@@ -26,21 +29,6 @@
         extraGroups = [ "wheel" "gamemode" "networkmanager" ];
       };
 
-      networking.networkmanager.enable = true;
-
-      hardware.bluetooth = {
-        enable = true;
-        powerOnBoot = true;
-      };
-      services.blueman.enable = true;
-
-      services.greetd = {
-        enable = true;
-        settings.default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd niri-session";
-          user = "greeter";
-        };
-      };
 
       hardware.nvidia.prime = {
         offload.enable = true;
@@ -50,7 +38,6 @@
 
       services.asusd.enable = true;
       services.supergfxd.enable = true;
-      services.power-profiles-daemon.enable = true;
 
       environment.sessionVariables = {
         LIBVA_DRIVER_NAME = "nvidia";
