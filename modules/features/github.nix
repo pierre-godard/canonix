@@ -20,7 +20,7 @@
     homeManager = { config, ... }: {
       imports = [ inputs.sops-nix.homeManagerModules.sops ];
       sops = {
-        defaultSopsFile = ../sops/secrets.enc.yaml;
+        defaultSopsFile = ./sops/secrets.enc.yaml;
         age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
         secrets.ssh_private_key.path = "${config.home.homeDirectory}/.ssh/id_ed25519";
       };
