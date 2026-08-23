@@ -9,6 +9,9 @@
     catppuccin.url = "github:catppuccin/nix";
 
     sops-nix.url = "github:Mic92/sops-nix";
+
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    den.url = "github:denful/den";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake
