@@ -12,6 +12,9 @@
         };
       };
     };
+    programs.claude-code = {
+      enable = true;
+    };
     programs.jjui = {
       enable = true;
     };
