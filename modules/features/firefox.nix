@@ -1,7 +1,11 @@
-{ config, lib, pkgs, ... }: {
-  flake.homeModules.firefox = { pkgs, lib, ... }: {
-    programs.firefox = {
-      enable = true;
+{ den, ... }: {
+  flake.homeModules.firefox = { ... }: {
+    programs.firefox.enable = true;
+  };
+
+  den.aspects.firefox = {
+    homeManager = { ... }: {
+      programs.firefox.enable = true;
     };
   };
 }

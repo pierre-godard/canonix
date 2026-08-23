@@ -1,25 +1,34 @@
-{ self, inputs, ... }: {
-
-  flake.homeModules.sops = { pkgs, lib, config, ... }: {
-    imports = [
-      inputs.sops-nix.homeManagerModules.sops
-    ];
-
+{ inputs, den, ... }: {
+  flake.homeModules.sops = { config, ... }: {
+    imports = [ inputs.sops-nix.homeManagerModules.sops ];
     sops = {
       defaultSopsFile = ./secrets.enc.yaml;
       age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
     };
   };
 
-  flake.nixosModules.sops = { config, lib, pkgs, ... }: {
-    imports = [
-      inputs.sops-nix.nixosModules.sops
-    ];
-
+  flake.nixosModules.sops = { ... }: {
+    imports = [ inputs.sops-nix.nixosModules.sops ];
     sops = {
       defaultSopsFile = ./secrets.enc.yaml;
-      age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+      age.keyFile = "/root/.config/sops/age/keys.txt";
     };
   };
 
+  den.aspects.sops = {
+    nixos = { ... }: {
+      imports = [ inputs.sops-nix.nixosModules.sops ];
+      sops = {
+        defaultSopsFile = ./secrets.enc.yaml;
+        age.keyFile = "/root/.config/sops/age/keys.txt";
+      };
+    };
+    homeManager = { config, ... }: {
+      imports = [ inputs.sops-nix.homeManagerModules.sops ];
+      sops = {
+        defaultSopsFile = ./secrets.enc.yaml;
+        age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+      };
+    };
+  };
 }
