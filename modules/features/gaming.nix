@@ -3,6 +3,12 @@
     nixos = { pkgs, ... }: {
       imports = [ inputs.nix-gaming.nixosModules.pipewireLowLatency ];
 
+      services.pipewire = {
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+      };
+
       boot.kernelPackages = pkgs.linuxPackages_zen;
       boot.kernel.sysctl."vm.max_map_count" = 2147483642;
 
