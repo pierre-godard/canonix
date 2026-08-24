@@ -1,5 +1,5 @@
 { den, ... }: {
-  den.aspects.jotunheim = {
+  den.aspects.yggdrasil = {
     nixos = { ... }: {
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;

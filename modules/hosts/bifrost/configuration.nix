@@ -1,5 +1,5 @@
 { den, ... }: {
-  den.aspects.wsl = {
+  den.aspects.bifrost = {
     includes = [
       den.batteries.hostname
       den.aspects.locale

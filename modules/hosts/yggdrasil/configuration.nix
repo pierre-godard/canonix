@@ -1,5 +1,5 @@
 { den, ... }: {
-  den.aspects.jotunheim = {
+  den.aspects.yggdrasil = {
     includes = [
       den.batteries.hostname
       den.aspects.locale

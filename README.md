@@ -4,12 +4,12 @@ A modular NixOS + home-manager configuration built with [den](https://den.denful
 
 ## Hosts
 
-| Host | Kind | Users | Notable aspects |
-|---|---|---|---|
-| `rog` | NixOS — ASUS ROG gaming laptop | pierre | desktop · laptop · gaming · catppuccin |
-| `wsl` | NixOS-WSL — dev environment | nixos · pierre | locale · shell |
-| `jotunheim` | NixOS — home server | pierre | kubernetes (K3S) |
-| `midgard` | Ubuntu — home-manager only | pierre | data-science |
+| Host | Realm | Purpose | Kind | Notable aspects |
+|---|---|---|---|---|
+| `utgard` | Stronghold of challenges | Old ASUS ROG — LAN gaming | NixOS | desktop · laptop · gaming · catppuccin |
+| `bifrost` | The bridge between worlds | NixOS-WSL — daily dev env | NixOS-WSL | locale · shell |
+| `midgard` | The human realm | Ubuntu work laptop — data science | home-manager only | data-science |
+| `yggdrasil` | The world tree | Home server — K3S cluster | NixOS | kubernetes |
 
 ## Structure
 
@@ -38,9 +38,9 @@ modules/
 │   ├── sops/              # sops-nix age encryption
 │   └── ssh.nix
 ├── hosts/
-│   ├── rog/               # Gaming laptop (NVIDIA Prime · asusd · supergfxd)
-│   ├── wsl/               # NixOS-WSL
-│   └── jotunheim/         # Home server
+│   ├── utgard/            # LAN gaming laptop (NVIDIA Prime · asusd · supergfxd)
+│   ├── bifrost/           # NixOS-WSL
+│   └── yggdrasil/         # Home server
 └── homes/
     ├── pierre.nix         # Base user aspect
     ├── nixos.nix          # WSL system user aspect
@@ -61,17 +61,17 @@ This repo uses [sops-nix](https://github.com/Mic92/sops-nix) with age encryption
 
 Place your age private key at `~/.config/sops/age/keys.txt` before activating any configuration.
 
-### Hardware configs (rog · jotunheim)
+### Hardware configs (rog · yggdrasil)
 
-The `hardware.nix` files in `hosts/rog/` and `hosts/jotunheim/` contain placeholder filesystem and bootloader values. Replace them with the output of `nixos-generate-config` on the actual hardware before deploying.
+The `hardware.nix` files in `hosts/utgard/` and `hosts/yggdrasil/` contain placeholder filesystem and bootloader values. Replace them with the output of `nixos-generate-config` on the actual hardware before deploying.
 
 ## Activating
 
 ```sh
 # NixOS hosts
-sudo nixos-rebuild switch --flake github:pierre-godard/canonix#rog
-sudo nixos-rebuild switch --flake github:pierre-godard/canonix#wsl
-sudo nixos-rebuild switch --flake github:pierre-godard/canonix#jotunheim
+sudo nixos-rebuild switch --flake github:pierre-godard/canonix#utgard
+sudo nixos-rebuild switch --flake github:pierre-godard/canonix#bifrost
+sudo nixos-rebuild switch --flake github:pierre-godard/canonix#yggdrasil
 
 # Ubuntu work laptop (standalone home-manager)
 home-manager switch --flake 'github:pierre-godard/canonix#pierre@midgard'

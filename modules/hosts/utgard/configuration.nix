@@ -1,5 +1,5 @@
 { den, ... }: {
-  den.aspects.rog = {
+  den.aspects.utgard = {
     includes = [
       den.batteries.hostname
       den.aspects.locale
