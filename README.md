@@ -1,49 +1,78 @@
 # Canonix
 
-A modular NixOS flake configuration following the dendritic pattern (from Vimjoyer), built with flake-parts and home-manager.
+A modular NixOS + home-manager configuration built with [den](https://den.denful.dev/) (aspect-oriented framework), [flake-parts](https://flake.parts/), and [import-tree](https://github.com/vic/import-tree).
+
+## Hosts
+
+| Host | Kind | Users | Notable aspects |
+|---|---|---|---|
+| `rog` | NixOS — ASUS ROG gaming laptop | pierre | desktop · laptop · gaming · catppuccin |
+| `wsl` | NixOS-WSL — dev environment | nixos · pierre | locale · shell |
+| `jotunheim` | NixOS — home server | pierre | kubernetes (K3S) |
+| `midgard` | Ubuntu — home-manager only | pierre | data-science |
 
 ## Structure
 
 ```
-canonix/
-├── flake.nix       # Entry point — inputs and outputs
-├── flake.lock      # Locked dependencies
-├── modules/
-│   ├── parts.nix   # Flake-parts setup (systems, home-manager)
-│   ├── features/   # Feature modules (sops, github, shell, niri, …)
-│   ├── hosts/      # Host-specific configurations (wsl)
-│   └── homes/      # Home-manager user configs (nixos, pierre)
-└── README.md
+modules/
+├── den.nix          # Host and standalone-home declarations
+├── parts.nix        # Flake-parts wiring (home-manager module)
+├── features/        # Reusable den aspects
+│   ├── bluetooth.nix
+│   ├── catppuccin.nix
+│   ├── data-science.nix   # uv · go · rustup · opentofu · direnv
+│   ├── desktop.nix        # niri + greetd (composite)
+│   ├── development.nix    # git · jj · claude-code · jjui
+│   ├── firefox.nix
+│   ├── gaming.nix         # zen kernel · Steam · Proton-GE · gamemode · gamescope
+│   ├── ghostty.nix
+│   ├── github.nix         # SSH key via sops
+│   ├── greetd.nix         # tuigreet → niri-session
+│   ├── kubernetes.nix     # K3S · kubectl · helm · k9s
+│   ├── laptop.nix         # bluetooth + networking + power (composite)
+│   ├── locale.nix         # timezone · i18n
+│   ├── networking.nix     # NetworkManager
+│   ├── niri.nix
+│   ├── power.nix          # power-profiles-daemon
+│   ├── shell/             # fish · nushell · starship · helix · navi
+│   ├── sops/              # sops-nix age encryption
+│   └── ssh.nix
+├── hosts/
+│   ├── rog/               # Gaming laptop (NVIDIA Prime · asusd · supergfxd)
+│   ├── wsl/               # NixOS-WSL
+│   └── jotunheim/         # Home server
+└── homes/
+    ├── pierre.nix         # Base user aspect
+    ├── nixos.nix          # WSL system user aspect
+    └── midgard.nix        # Standalone home-manager (Ubuntu)
 ```
-
-## Features
-
-- **Flake-based** — using flake-parts for modularity, import-tree for auto-discovery
-- **Home-manager** — declarative user configuration
-- **Sops-nix** — encrypted secrets with age encryption
 
 ## Setup
 
 ### Prerequisites
 
-- NixOS (or Nix on any Linux) with flakes enabled (`nix-command` and `flakes` experimental features)
-- For WSL: NixOS-WSL
+- Nix with flakes enabled (`nix-command` and `flakes` experimental features)
+- For WSL: [NixOS-WSL](https://github.com/nix-community/NixOS-WSL)
+- For Ubuntu (midgard): [home-manager](https://nix-community.github.io/home-manager/) standalone
 
-### First-time setup: sops-nix
+### Secrets (sops-nix)
 
-This repo uses sops-nix with age encryption for managing secrets.
+This repo uses [sops-nix](https://github.com/Mic92/sops-nix) with age encryption.
 
-**1. Retrieve your age key**
+Place your age private key at `~/.config/sops/age/keys.txt` before activating any configuration.
 
-Retrieve your age key from wherever you store it (e.g. a password manager).
+### Hardware configs (rog · jotunheim)
 
-**2. Place it at the expected path**
+The `hardware.nix` files in `hosts/rog/` and `hosts/jotunheim/` contain placeholder filesystem and bootloader values. Replace them with the output of `nixos-generate-config` on the actual hardware before deploying.
 
-Copy or symlink your key to `~/.config/sops/age/keys.txt` so sops-nix can find it during activation.
-
-## Building from GitHub
+## Activating
 
 ```sh
-# Replace <host> with your host configuration name (e.g. wsl)
-sudo nixos-rebuild switch --flake github:pierre-godard/canonix#<host>
+# NixOS hosts
+sudo nixos-rebuild switch --flake github:pierre-godard/canonix#rog
+sudo nixos-rebuild switch --flake github:pierre-godard/canonix#wsl
+sudo nixos-rebuild switch --flake github:pierre-godard/canonix#jotunheim
+
+# Ubuntu work laptop (standalone home-manager)
+home-manager switch --flake 'github:pierre-godard/canonix#pierre@midgard'
 ```
