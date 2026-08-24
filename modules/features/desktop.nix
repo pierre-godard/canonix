@@ -6,5 +6,9 @@
       den.aspects.firefox
       den.aspects.ghostty
     ];
+    nixos = { pkgs, ... }: {
+      environment.systemPackages = [ pkgs.nautilus ];
+      services.gvfs.enable = true;
+    };
   };
 }
