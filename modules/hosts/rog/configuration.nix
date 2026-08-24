@@ -5,12 +5,9 @@
       den.aspects.locale
       den.aspects.catppuccin
       den.aspects.shell
-      den.aspects.niri
+      den.aspects.desktop
       den.aspects.gaming
-      den.aspects.bluetooth
-      den.aspects.networking
-      den.aspects.greetd
-      den.aspects.power
+      den.aspects.laptop
       den.aspects.sops
     ];
     nixos = { pkgs, lib, ... }: {
