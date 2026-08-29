@@ -1,4 +1,4 @@
-{ den, ... }: {
+{ den, lib, ... }: {
   den.aspects.utgard = {
     nixos = { ... }: {
       boot.loader.systemd-boot.enable = true;
