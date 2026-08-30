@@ -1,10 +1,8 @@
 { den, ... }: {
   den.aspects.nautilus = {
-    nixos = { ... }: {
+    nixos = { pkgs, ... }: {
+      environment.systemPackages = [ pkgs.nautilus ];
       services.gvfs.enable = true;
-    };
-    homeManager = { pkgs, ... }: {
-      home.packages = [ pkgs.nautilus ];
     };
   };
 }
