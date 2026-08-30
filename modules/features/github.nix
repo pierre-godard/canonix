@@ -30,7 +30,6 @@
         settings."*" = {
           PasswordAuthentication = false;
           ChallengeResponseAuthentication = false;
-          StrictHostKeyChecking = "yes";
           PubkeyAuthentication = true;
         };
         extraConfig = ''
