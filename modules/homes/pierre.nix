@@ -6,6 +6,13 @@
       den.aspects.development
       den.aspects.github
     ];
+    nixos = { pkgs, ... }: {
+      users.users.pierre = {
+        isNormalUser = true;
+        shell = pkgs.fish;
+        extraGroups = [ "wheel" ];
+      };
+    };
     homeManager = { ... }: {
       home.stateVersion = "26.05";
     };

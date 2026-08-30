@@ -10,7 +10,7 @@
       den.aspects.laptop
       den.aspects.sops
     ];
-    nixos = { pkgs, ... }: {
+    nixos = { ... }: {
       nixpkgs.config.allowUnfree = true;
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
       security.sudo.enable = true;
@@ -19,11 +19,7 @@
       home-manager.useUserPackages = true;
       home-manager.backupFileExtension = ".backup";
 
-      users.users.pierre = {
-        isNormalUser = true;
-        shell = pkgs.fish;
-        extraGroups = [ "wheel" "gamemode" "networkmanager" ];
-      };
+      users.users.pierre.extraGroups = [ "gamemode" "networkmanager" ];
 
       hardware.nvidia.prime = {
         offload.enable = true;

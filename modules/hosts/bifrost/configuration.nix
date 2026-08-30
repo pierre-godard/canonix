@@ -4,7 +4,7 @@
       den.batteries.hostname
       den.aspects.locale
     ];
-    nixos = { pkgs, lib, ... }: {
+    nixos = { lib, ... }: {
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
       nixpkgs.config.allowUnfree = true;
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -14,16 +14,6 @@
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.backupFileExtension = ".backup";
-      users.users.pierre = {
-        isNormalUser = true;
-        shell = pkgs.fish;
-        extraGroups = [ "wheel" ];
-      };
-      users.users.nixos = {
-        isNormalUser = true;
-        shell = pkgs.fish;
-        extraGroups = [ "wheel" ];
-      };
     };
   };
 }
