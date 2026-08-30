@@ -11,9 +11,10 @@
       den.aspects.sops
       den.aspects.common
     ];
-    nixos = { ... }: {
+    nixos = { config, ... }: {
       users.users.pierre.extraGroups = [ "gamemode" "networkmanager" ];
 
+      hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
       hardware.nvidia.prime = {
         offload.enable = true;
         intelBusId = "PCI:0:2:0";
