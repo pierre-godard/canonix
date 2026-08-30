@@ -5,6 +5,7 @@
       den.aspects.shell
       den.aspects.development
       den.aspects.github
+      den.aspects.keyboard
     ];
     nixos = { pkgs, ... }: {
       users.users.pierre = {
