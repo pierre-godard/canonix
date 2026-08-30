@@ -10,8 +10,7 @@
       den.aspects.laptop
       den.aspects.sops
     ];
-    nixos = { pkgs, lib, ... }: {
-      nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+    nixos = { pkgs, ... }: {
       nixpkgs.config.allowUnfree = true;
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
       security.sudo.enable = true;
@@ -28,13 +27,8 @@
         extraGroups = [ "wheel" "gamemode" "networkmanager" ];
       };
 
-      # Use the systemd-boot EFI boot loader.
-      boot.loader.systemd-boot.enable = true;
-      boot.loader.efi.canTouchEfiVariables = true;
-
       # Configure network connections interactively with nmcli or nmtui.
       networking.networkmanager.enable = true;
-
 
       hardware.nvidia.prime = {
         offload.enable = true;
