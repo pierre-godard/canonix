@@ -12,7 +12,14 @@
     programs.jjui.enable = true;
   };
 
+  den.aspects.vscode = {
+    homeManager = { ... }: {
+      programs.vscode.enable = true;
+    };
+  };
+
   den.aspects.development = {
+    includes = [ den.aspects.vscode ];
     homeManager = { pkgs, ... }: {
       programs.git.enable = true;
       programs.jujutsu = {
