@@ -11,12 +11,41 @@
       den.aspects.sops
       den.aspects.common
     ];
-    nixos = { config, ... }: {
+    homeManager = { lib, ... }: {
+      home.activation.steamLibraryFolder = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        vdf="$HOME/.local/share/Steam/steamapps/libraryfolders.vdf"
+        if ! grep -q '"/mnt/games"' "$vdf" 2>/dev/null; then
+          mkdir -p "$(dirname "$vdf")"
+          cat > "$vdf" << 'EOF'
+"libraryfolders"
+{
+	"1"
+	{
+		"path"		"/mnt/games"
+	}
+}
+EOF
+        fi
+      '';
+    };
+
+    nixos = { config, pkgs, ... }: {
+      boot.kernelParams = [ "pcie_aspm=off" ];
       users.users.pierre.extraGroups = [ "gamemode" "networkmanager" ];
 
-      systemd.tmpfiles.rules = [
-        "d /mnt/games 0755 pierre users -"
-      ];
+      systemd.services.chown-games = {
+        description = "Fix ownership of /mnt/games";
+        after = [ "mnt-games.mount" ];
+        requires = [ "mnt-games.mount" ];
+        wantedBy = [ "mnt-games.mount" ];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = [
+            "${pkgs.coreutils}/bin/mkdir -p /mnt/games/steamapps"
+            "${pkgs.coreutils}/bin/chown pierre:users /mnt/games /mnt/games/steamapps"
+          ];
+        };
+      };
 
       hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
       hardware.nvidia.prime = {
