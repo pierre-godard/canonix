@@ -14,6 +14,10 @@
     nixos = { config, ... }: {
       users.users.pierre.extraGroups = [ "gamemode" "networkmanager" ];
 
+      systemd.tmpfiles.rules = [
+        "d /mnt/games 0755 pierre users -"
+      ];
+
       hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
       hardware.nvidia.prime = {
         offload.enable = true;
