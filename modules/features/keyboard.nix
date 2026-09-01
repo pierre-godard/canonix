@@ -1,7 +1,7 @@
 { den, ... }: {
   den.aspects.keyboard = {
     nixos = { pkgs, ... }: {
-      services.xserver.extraLayouts."us_qwerty-fr" = {
+      services.xserver.xkb.extraLayouts."us_qwerty-fr" = {
         description = "French QWERTY";
         languages = [ "fra" ];
         symbolsFile = "${pkgs.qwerty-fr}/share/X11/xkb/symbols/us_qwerty-fr";
