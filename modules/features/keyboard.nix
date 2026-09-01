@@ -8,11 +8,11 @@
       };
       services.xserver.xkb = {
         layout = "us_qwerty-fr";
-        options = "caps:super";
+        options = "lv3:caps_switch";
       };
       environment.variables = {
         XKB_DEFAULT_LAYOUT = "us_qwerty-fr";
-        XKB_DEFAULT_OPTIONS = "caps:super";
+        XKB_DEFAULT_OPTIONS = "lv3:caps_switch";
       };
     };
   };

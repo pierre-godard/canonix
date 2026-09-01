@@ -1,8 +1,12 @@
 { self, inputs, ... }: {
-  perSystem = { pkgs, ... }: {
+  perSystem = { pkgs, lib, ... }: {
     packages.myNoctalia = inputs.wrapper-modules.wrappers.noctalia-shell.wrap {
       inherit pkgs;
-      settings = (builtins.fromJSON (builtins.readFile ./settings.json)).settings;
+      settings = lib.recursiveUpdate
+        (builtins.fromJSON (builtins.readFile ./settings.json)).settings
+        {
+          wallpaper.directory = "${../../../assets}";
+        };
     };
   };
 }

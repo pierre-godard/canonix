@@ -7,6 +7,8 @@
       den.aspects.shell
       den.aspects.desktop
       den.aspects.gaming
+      den.aspects.beyond-all-reason
+      den.aspects.dms-shell
       den.aspects.laptop
       den.aspects.sops
       den.aspects.common
@@ -27,6 +29,7 @@
 EOF
         fi
       '';
+      home.file."Pictures/Wallpapers".source = ../../../assets;
     };
 
     nixos = { config, pkgs, ... }: {

@@ -7,6 +7,7 @@
       den.aspects.firefox
       den.aspects.ghostty
       den.aspects.nautilus
+      den.aspects.plymouth
     ];
   };
 }
