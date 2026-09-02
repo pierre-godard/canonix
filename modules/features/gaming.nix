@@ -1,5 +1,6 @@
 { inputs, den, ... }: {
   den.aspects.gaming = {
+    includes = [ den.aspects.minecraft ];
     nixos = { pkgs, ... }: {
       imports = [ inputs.nix-gaming.nixosModules.pipewireLowLatency ];
 
