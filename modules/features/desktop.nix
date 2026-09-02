@@ -1,5 +1,8 @@
 { den, ... }: {
   den.aspects.desktop = {
+    nixos = { ... }: {
+      programs.dconf.enable = true;
+    };
     includes = [
       den.batteries.host-aspects
       den.aspects.niri
