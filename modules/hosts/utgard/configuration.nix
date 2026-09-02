@@ -29,7 +29,6 @@
 EOF
         fi
       '';
-      home.file."Pictures/Wallpapers".source = ../../../assets;
     };
 
     nixos = { config, pkgs, ... }: {
