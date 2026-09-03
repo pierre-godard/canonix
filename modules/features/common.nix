@@ -1,7 +1,8 @@
-{ den, ... }: {
+{ inputs, den, ... }: {
   den.aspects.common = {
     nixos = { ... }: {
       nixpkgs.config.allowUnfree = true;
+      nixpkgs.overlays = [ inputs.nix4vscode.overlays.default ];
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
       nix.settings.auto-optimise-store = true;
       nix.gc = {
