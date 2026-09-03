@@ -20,12 +20,8 @@
       }:
       let
         mkLintHook =
+          { extensions, command }:
           {
-            enable,
-            extensions,
-            command,
-          }:
-          lib.optional enable {
             matcher = "Edit|Write";
             hooks = [
               {
@@ -163,14 +159,12 @@
                   ];
                 }
               ];
-              PostToolUse = lib.flatten [
+              PostToolUse = [
                 (mkLintHook {
-                  enable = true;
                   extensions = ''"$file_path" == *.go'';
                   command = ''golangci-lint run --fix "$file_path" 2>/dev/null || true'';
                 })
                 (mkLintHook {
-                  enable = true;
                   extensions = ''"$file_path" == *.py'';
                   command = ''
                     uvx ruff check --fix "$file_path" 2>/dev/null || true
@@ -178,22 +172,18 @@
                   '';
                 })
                 (mkLintHook {
-                  enable = true;
                   extensions = ''"$file_path" == *.nix'';
                   command = ''nixfmt "$file_path" 2>/dev/null || true'';
                 })
                 (mkLintHook {
-                  enable = true;
                   extensions = ''"$file_path" == *.tf'';
                   command = ''terraform fmt "$file_path" 2>/dev/null || true'';
                 })
                 (mkLintHook {
-                  enable = true;
                   extensions = ''"$file_path" == *.js || "$file_path" == *.ts || "$file_path" == *.jsx || "$file_path" == *.tsx'';
                   command = ''npx --yes prettier --write "$file_path" 2>/dev/null || true'';
                 })
                 (mkLintHook {
-                  enable = true;
                   extensions = ''"$file_path" == *.sql'';
                   command = ''sqlfluff fix --dialect bigquery "$file_path" 2>/dev/null || true'';
                 })
