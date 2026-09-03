@@ -1,6 +1,6 @@
 { den, ... }: {
   den.aspects.development = {
-    includes = [ den.aspects.vscode ];
+    includes = with den.aspects; [ vscode claudecode ];
     homeManager = { pkgs, ... }: {
       programs.git.enable = true;
       programs.jujutsu = {
@@ -10,7 +10,6 @@
           name = "Pierre Godard";
         };
       };
-      programs.claude-code.enable = true;
       programs.jjui.enable = true;
     };
   };
