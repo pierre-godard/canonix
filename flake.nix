@@ -6,6 +6,11 @@
     wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
     home-manager.url = "github:nix-community/home-manager";
 
+    nixgl = {
+      url = "github:guibou/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     catppuccin.url = "github:catppuccin/nix";
 
     sops-nix.url = "github:Mic92/sops-nix";
