@@ -14,7 +14,6 @@ in
     aspect = {
       includes = [
         den.aspects.pierre
-        den.aspects.data-science
       ];
       homeManager = { ... }: {
         home.username = "pierre";
