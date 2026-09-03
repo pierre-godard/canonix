@@ -14,6 +14,7 @@ in
     aspect = {
       includes = [
         den.aspects.pierre
+        den.aspects.obsidian
       ];
       homeManager = { ... }: {
         home.username = "pierre";
