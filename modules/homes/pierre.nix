@@ -9,6 +9,7 @@
       den.aspects.direnv
       den.aspects.zellij
       den.aspects.neovim
+      den.aspects.btop
     ];
     nixos = { pkgs, ... }: {
       users.users.pierre = {
