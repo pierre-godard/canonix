@@ -6,6 +6,7 @@
       den.aspects.development
       den.aspects.github
       den.aspects.direnv
+      den.aspects.zellij
     ];
     nixos = { pkgs, ... }: {
       users.users.nixos = {

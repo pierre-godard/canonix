@@ -7,6 +7,7 @@
       den.aspects.github
       den.aspects.keyboard
       den.aspects.direnv
+      den.aspects.zellij
     ];
     nixos = { pkgs, ... }: {
       users.users.pierre = {
