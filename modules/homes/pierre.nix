@@ -8,6 +8,7 @@
       den.aspects.keyboard
       den.aspects.direnv
       den.aspects.zellij
+      den.aspects.neovim
     ];
     nixos = { pkgs, ... }: {
       users.users.pierre = {
