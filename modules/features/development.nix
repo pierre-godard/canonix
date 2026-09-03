@@ -1,13 +1,12 @@
 { den, ... }: {
   den.aspects.development = {
-    includes = with den.aspects; [ vscode claudecode ];
-    homeManager = { pkgs, ... }: {
-      programs.git.enable = true;
+    includes = with den.aspects; [ vscode claudecode git ];
+    homeManager = { config, pkgs, ... }: {
       programs.jujutsu = {
         enable = true;
         settings.user = {
-          email = "pierre-godard@users.noreply.github.com";
-          name = "Pierre Godard";
+          name = config.user.name;
+          email = config.user.email;
         };
       };
       programs.jjui.enable = true;

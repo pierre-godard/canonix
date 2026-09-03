@@ -19,6 +19,8 @@
     };
     homeManager = { ... }: {
       home.stateVersion = "26.05";
+      user.name = "Pierre Godard";
+      user.email = "pierre-godard@users.noreply.github.com";
     };
   };
 }
