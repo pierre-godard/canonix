@@ -8,25 +8,15 @@
     let
       obsidian-base = pkgs.obsidian.override { commandLineArgs = "--no-sandbox"; };
 
-      obsidian-wrapped =
-        if pkgs ? nixgl then
-          pkgs.symlinkJoin {
-            name = "obsidian-wrapped";
-            meta.mainProgram = "obsidian";
-            paths = [ obsidian-base ];
-            nativeBuildInputs = [ pkgs.makeWrapper ];
-            postBuild = ''
-              rm $out/bin/obsidian
-              makeWrapper ${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel $out/bin/obsidian \
-                --add-flags "${obsidian-base}/bin/obsidian"
-
-              rm $out/share/applications/obsidian.desktop
-              substitute ${obsidian-base}/share/applications/obsidian.desktop $out/share/applications/obsidian.desktop \
-                --replace-fail "Exec=obsidian" "Exec=$out/bin/obsidian"
-            '';
-          }
-        else
-          obsidian-base;
+      # No need to also substitute the package's bundled .desktop file: the
+      # xdg.desktopEntries.obsidian entry below already writes a correctly
+      # Exec=-pointed one to ~/.local/share/applications, which takes
+      # priority per XDG_DATA_HOME precedence.
+      obsidian-wrapped = import ../_lib/nixgl-wrap.nix {
+        inherit pkgs;
+        package = obsidian-base;
+        binName = "obsidian";
+      };
     in
     {
       programs.obsidian = {
