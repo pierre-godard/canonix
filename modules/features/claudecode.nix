@@ -49,11 +49,13 @@
           CYAN=$'\033[36m'
           RESET=$'\033[0m'
 
-          MODEL=$(echo "$input" | jq -r '.model.display_name')
-          DIR=$(echo "$input" | jq -r '.workspace.current_dir')
-          PCT=$(echo "$input" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
-          ITOK=$(echo "$input" | jq -r '.context_window.total_input_tokens // 0' | cut -d. -f1)
-          OTOK=$(echo "$input" | jq -r '.context_window.total_output_tokens // 0' | cut -d. -f1)
+          IFS=$'\t' read -r MODEL DIR PCT ITOK OTOK <<< "$(echo "$input" | jq -r '[
+            .model.display_name,
+            .workspace.current_dir,
+            ((.context_window.used_percentage // 0) | floor),
+            ((.context_window.total_input_tokens // 0) | floor),
+            ((.context_window.total_output_tokens // 0) | floor)
+          ] | @tsv')"
 
           if [ "$PCT" -lt 50 ]; then BAR_COLOR="$GREEN"
           elif [ "$PCT" -lt 80 ]; then BAR_COLOR="$YELLOW"
