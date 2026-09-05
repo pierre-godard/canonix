@@ -1,15 +1,18 @@
 { den, ... }: {
   den.aspects.pierre = {
-    includes = [
-      den.aspects.catppuccin
-      den.aspects.shell
-      den.aspects.development
-      den.aspects.github
-      den.aspects.keyboard
-      den.aspects.direnv
-      den.aspects.zellij
-      den.aspects.neovim
-      den.aspects.btop
+    includes = with den.aspects; [
+      catppuccin
+      shell
+      vscode
+      claudecode
+      git
+      jujutsu
+      github
+      keyboard
+      direnv
+      zellij
+      neovim
+      btop
     ];
     nixos = { pkgs, ... }: {
       users.users.pierre = {

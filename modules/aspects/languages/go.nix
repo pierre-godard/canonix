@@ -1,4 +1,3 @@
-# modules/features/go.nix
 # Go tooling configuration
 { ... }:
 {

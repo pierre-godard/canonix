@@ -1,4 +1,3 @@
-# modules/features/nix.nix
 # Nix tooling
 { ... }:
 {

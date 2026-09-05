@@ -1,4 +1,3 @@
-# modules/features/btop.nix
 # btop system monitor
 { ... }:
 {

@@ -1,4 +1,3 @@
-# modules/features/zellij.nix
 # Zellij terminal multiplexer
 { ... }:
 {

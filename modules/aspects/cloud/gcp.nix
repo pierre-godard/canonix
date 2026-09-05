@@ -1,4 +1,3 @@
-# modules/features/gcp.nix
 # Google Cloud SDK
 { ... }:
 {

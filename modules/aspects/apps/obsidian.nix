@@ -1,4 +1,3 @@
-# modules/features/obsidian.nix
 # Obsidian notes, nixGL-wrapped where the nixgl overlay is present (midgard only —
 # NixOS hosts get OpenGL/Vulkan natively and never carry that overlay)
 { ... }:
@@ -12,7 +11,7 @@
       # xdg.desktopEntries.obsidian entry below already writes a correctly
       # Exec=-pointed one to ~/.local/share/applications, which takes
       # priority per XDG_DATA_HOME precedence.
-      obsidian-wrapped = import ../_lib/nixgl-wrap.nix {
+      obsidian-wrapped = import ../../_lib/nixgl-wrap.nix {
         inherit pkgs;
         package = obsidian-base;
         binName = "obsidian";

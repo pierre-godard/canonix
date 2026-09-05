@@ -1,8 +1,7 @@
-# modules/features/temporal.nix
-# Temporal CLI tooling
+# Node.js tooling
 { ... }:
 {
-  den.aspects.temporal.homeManager =
+  den.aspects.nodejs.homeManager =
     {
       config,
       lib,
@@ -11,7 +10,7 @@
     }:
     {
       home.packages = with pkgs; [
-        temporal-cli
+        nodejs_24
       ];
     };
 }

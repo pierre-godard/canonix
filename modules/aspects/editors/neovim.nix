@@ -1,4 +1,3 @@
-# modules/features/neovim.nix
 # Neovim as an editor option alongside Helix
 { ... }:
 {

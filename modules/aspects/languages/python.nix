@@ -1,4 +1,3 @@
-# modules/features/python.nix
 # Python tooling configuration
 { ... }:
 {

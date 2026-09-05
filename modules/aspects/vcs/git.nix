@@ -1,4 +1,3 @@
-# modules/features/git.nix
 # Git configuration with identity injection
 { den, ... }:
 {

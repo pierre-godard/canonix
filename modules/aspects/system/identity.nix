@@ -1,6 +1,5 @@
-# modules/features/identity.nix
-# Shared user identity options, consumed by git.nix. Values are set per-home
-# (see modules/homes/pierre.nix, modules/homes/nixos.nix).
+# Shared user identity options, consumed by vcs/git.nix and vcs/jujutsu.nix.
+# Values are set per-home (see modules/homes/pierre.nix, modules/homes/nixos.nix).
 { ... }:
 {
   den.aspects.identity.homeManager =

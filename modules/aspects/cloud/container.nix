@@ -1,4 +1,3 @@
-# modules/features/container.nix
 # Podman, a rootless container engine with a Docker API-compatible socket
 { ... }:
 {

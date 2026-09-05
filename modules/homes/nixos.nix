@@ -1,14 +1,17 @@
 { den, ... }: {
   den.aspects.nixos = {
-    includes = [
-      den.aspects.catppuccin
-      den.aspects.shell
-      den.aspects.development
-      den.aspects.github
-      den.aspects.direnv
-      den.aspects.zellij
-      den.aspects.neovim
-      den.aspects.btop
+    includes = with den.aspects; [
+      catppuccin
+      shell
+      vscode
+      claudecode
+      git
+      jujutsu
+      github
+      direnv
+      zellij
+      neovim
+      btop
     ];
     nixos = { pkgs, ... }: {
       users.users.nixos = {

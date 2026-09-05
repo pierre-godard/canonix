@@ -1,4 +1,3 @@
-# modules/features/claudecode.nix
 # Claude Code configuration: LSP servers, lint-on-save hooks, statusline
 { den, ... }:
 {

@@ -1,4 +1,3 @@
-# modules/features/direnv.nix
 # Direnv and nix-direnv integration
 { ... }:
 {

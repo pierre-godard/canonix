@@ -17,26 +17,19 @@ A modular NixOS + home-manager configuration built with [den](https://den.denful
 modules/
 ├── den.nix          # Host and standalone-home declarations
 ├── parts.nix        # Flake-parts wiring (home-manager module)
-├── features/        # Reusable den aspects
-│   ├── bluetooth.nix
-│   ├── catppuccin.nix
-│   ├── data-science.nix   # uv · go · rustup · opentofu · direnv
-│   ├── desktop.nix        # niri + greetd (composite)
-│   ├── development.nix    # git · jj · claude-code · jjui
-│   ├── firefox.nix
-│   ├── gaming.nix         # zen kernel · Steam · Proton-GE · gamemode · gamescope
-│   ├── ghostty.nix
-│   ├── github.nix         # SSH key via sops
-│   ├── greetd.nix         # tuigreet → niri-session
-│   ├── kubernetes.nix     # K3S · kubectl · helm · k9s
-│   ├── laptop.nix         # bluetooth + networking + power (composite)
-│   ├── locale.nix         # timezone · i18n
-│   ├── networking.nix     # NetworkManager
-│   ├── niri.nix
-│   ├── power.nix          # power-profiles-daemon
-│   ├── shell/             # fish · nushell · starship · helix · navi
-│   ├── sops/              # sops-nix age encryption
-│   └── ssh.nix
+├── _lib/            # Shared helpers (e.g. nixGL wrapper)
+├── aspects/         # Reusable den aspects, grouped by domain
+│   ├── apps/          # firefox · ghostty · nautilus · obsidian
+│   ├── cloud/          # gcp · kubernetes · terraform · container
+│   ├── desktop/        # niri · greetd · plymouth · dms-shell · keyboard · keyring (composite)
+│   ├── editors/        # vscode · neovim · claude-code
+│   ├── gaming/         # beyond-all-reason · minecraft (composite)
+│   ├── hardware/       # bluetooth · networking · power · laptop (composite)
+│   ├── languages/      # go · nodejs · python · rust
+│   ├── shell/          # fish · nushell · starship · helix · navi · zellij · btop
+│   ├── sops/           # sops-nix age encryption
+│   ├── system/         # common · nix · locale · direnv · temporal · catppuccin · identity
+│   └── vcs/            # git · jujutsu · github (SSH key via sops)
 ├── hosts/
 │   ├── utgard/            # LAN gaming laptop (NVIDIA Prime · asusd · supergfxd)
 │   ├── bifrost/           # NixOS-WSL

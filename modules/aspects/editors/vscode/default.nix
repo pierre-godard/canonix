@@ -1,4 +1,3 @@
-# modules/features/vscode
 # VSCode configuration with profile-based extension management
 { ... }:
 {
