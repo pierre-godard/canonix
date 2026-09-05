@@ -8,12 +8,13 @@
     homeManager =
       {
         config,
+        lib,
         pkgs,
         ...
       }:
       let
-        # nix4vscode.forVscode and the --no-sandbox override are only needed on
-        # midgard (non-NixOS); NixOS hosts get the overlay-free system package.
+        # nix4vscode.forVscode is only needed on midgard (non-NixOS); NixOS
+        # hosts get the overlay-free system package.
         nonNixOS = pkgs ? nixgl;
         assetsPath = builtins.toString ./assets;
       in
@@ -22,11 +23,21 @@
           meslo-lgs-nf
         ];
 
+        # bin/code execs the package's own bundled `.code-wrapped` binary
+        # (see `cat ${pkgs.vscode}/bin/code`) — that's the sandboxed process.
+        # Restores VSCode's sandbox on Ubuntu 24.04's hardened kernel instead
+        # of disabling it with --no-sandbox.
+        home.activation = lib.mkIf nonNixOS (
+          import ../../../_lib/apparmor-userns.nix {
+            inherit pkgs lib;
+            name = "code-wrapped";
+            binPathGlob = "/nix/store/*-vscode-*/bin/.code-wrapped";
+          }
+        );
+
         programs.vscode = {
           enable = true;
-          # --no-sandbox workaround for Ubuntu 24.04's hardened kernel
-          # See: https://tamim.blog/post/fix-appimage-sandbox-issues-ubuntu-24-04/
-          package = if nonNixOS then pkgs.vscode.override { commandLineArgs = "--no-sandbox"; } else pkgs.vscode;
+          package = pkgs.vscode;
           mutableExtensionsDir = false;
           profiles =
             let
