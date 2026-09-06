@@ -34,8 +34,19 @@ let
   '';
   installScript = pkgs.writeShellScript "install-apparmor-userns-${name}" ''
     set -euo pipefail
-    if ! command -v apparmor_parser >/dev/null 2>&1 \
-      || [ "$(cat /sys/module/apparmor/parameters/enabled 2>/dev/null)" != "Y" ]; then
+    # home-manager's activate script strips PATH, so find these system binaries by absolute path
+    find_bin() {
+      for candidate in "$@"; do
+        if [ -x "$candidate" ]; then
+          echo "$candidate"
+          return 0
+        fi
+      done
+      return 1
+    }
+    sudo=$(find_bin /usr/bin/sudo /bin/sudo) || exit 0
+    apparmor_parser=$(find_bin /usr/sbin/apparmor_parser /sbin/apparmor_parser /usr/bin/apparmor_parser) || exit 0
+    if [ "$(cat /sys/module/apparmor/parameters/enabled 2>/dev/null)" != "Y" ]; then
       exit 0
     fi
     dest="/etc/apparmor.d/${name}"
@@ -43,8 +54,8 @@ let
       exit 0
     fi
     echo "canonix: installing AppArmor userns profile for ${name} (needs sudo)"
-    sudo install -Dm644 "${profileFile}" "$dest"
-    sudo apparmor_parser -r "$dest"
+    "$sudo" install -Dm644 "${profileFile}" "$dest"
+    "$sudo" "$apparmor_parser" -r "$dest"
   '';
 in
 {

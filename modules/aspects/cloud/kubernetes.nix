@@ -14,7 +14,7 @@
     homeManager = { pkgs, ... }: {
       home.packages = with pkgs; [
         kubectl
-        helm
+        kubernetes-helm
         k9s
       ];
     };
