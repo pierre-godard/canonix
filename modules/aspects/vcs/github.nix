@@ -5,7 +5,7 @@
       sops = {
         defaultSopsFile = ../sops/secrets.enc.yaml;
         age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-        secrets.ssh_private_key.path = "${config.home.homeDirectory}/.ssh/id_ed25519";
+        secrets.ssh_private_key.path = "${config.home.homeDirectory}/.ssh/github_pierre-godard";
       };
       programs.ssh = {
         enable = true;
@@ -19,7 +19,7 @@
           Host github.com
             HostName github.com
             User git
-            IdentityFile ~/.ssh/id_ed25519
+            IdentityFile ~/.ssh/github_pierre-godard
             IdentitiesOnly yes
         '';
       };
