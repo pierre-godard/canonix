@@ -63,12 +63,7 @@
         '';
       in
       {
-        home.packages = [
-          pkgs.alsa-lib
-          pkgs.alsa-utils
-          pkgs.pipewire
-          pkgs.sqlfluff
-        ];
+        home.packages = [ pkgs.sqlfluff ];
 
         programs.claude-code = {
           enable = true;
