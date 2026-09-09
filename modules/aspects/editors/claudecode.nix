@@ -65,6 +65,16 @@
       {
         home.packages = [ pkgs.sqlfluff ];
 
+        # claude-code bundles its own alsa-lib, whose plugin dir never has pipewire's PCM plugin (separate store path)
+        home.file.".asoundrc".text = ''
+          pcm_type.pipewire {
+            lib "${pkgs.pipewire}/lib/alsa-lib/libasound_module_pcm_pipewire.so"
+          }
+          ctl_type.pipewire {
+            lib "${pkgs.pipewire}/lib/alsa-lib/libasound_module_ctl_pipewire.so"
+          }
+        '';
+
         programs.claude-code = {
           enable = true;
 
