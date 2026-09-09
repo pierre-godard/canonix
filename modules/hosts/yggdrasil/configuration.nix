@@ -4,6 +4,7 @@
       den.batteries.hostname
       den.aspects.locale
       den.aspects.shell
+      den.aspects.audio
       den.aspects.kubernetes
       den.aspects.sops
       den.aspects.common

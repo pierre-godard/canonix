@@ -3,6 +3,7 @@
     includes = [
       den.batteries.hostname
       den.aspects.locale
+      den.aspects.audio
       den.aspects.common
     ];
     nixos = { lib, ... }: {

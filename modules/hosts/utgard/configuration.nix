@@ -7,6 +7,7 @@
       den.aspects.shell
       den.aspects.desktop
       den.aspects.gaming
+      den.aspects.audio
       den.aspects.beyond-all-reason
       den.aspects.dms-shell
       den.aspects.laptop

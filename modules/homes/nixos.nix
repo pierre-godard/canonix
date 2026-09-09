@@ -12,6 +12,7 @@
       zellij
       neovim
       btop
+      den.batteries.host-aspects
     ];
     nixos = { pkgs, ... }: {
       users.users.nixos = {
