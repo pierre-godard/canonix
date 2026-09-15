@@ -44,6 +44,7 @@
               default_extensions = [
                 "anthropic.claude-code"
                 "Catppuccin.catppuccin-vsc"
+                "marp-team.marp-vscode"
                 "ms-vscode-remote.remote-ssh-edit"
                 "ms-vscode-remote.remote-ssh"
                 "MS-vsliveshare.vsliveshare"
