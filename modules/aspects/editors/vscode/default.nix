@@ -48,6 +48,7 @@
                 "ms-vscode-remote.remote-ssh-edit"
                 "ms-vscode-remote.remote-ssh"
                 "MS-vsliveshare.vsliveshare"
+                "reduckted.vscode-gitweblinks"
                 "visualjj.visualjj"
                 "vivaxy.vscode-conventional-commits"
               ];
