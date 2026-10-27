@@ -115,6 +115,8 @@
           };
 
           settings = {
+            model = "claude-opus-5-5";
+
             voiceEnabled = true;
 
             statusLine = {
